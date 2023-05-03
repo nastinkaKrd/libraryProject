@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table style="border-style: solid; font-size: 2.2em; margin: auto; " >
+    <tr><td style="border-style: solid; border-width: 1px;" ><b>id:</b></td> <td style="border-style: solid; border-width: 1px;" th:text="${element.elementId}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;"><b>title:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.title}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;" ><b>type:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.type}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;"><b>style:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.style}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;"><b>amountOfElements:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.amountOfElements}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;" ><b>yearOfPublish:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.yearOfPublish}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;"><b>numOfPublish:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.numOfPublish}" /></tr>
+    <tr><td style="border-style: solid; border-width: 1px;"><b>publishCompanyName:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${element.publishCompanyName}" /></tr>
+    <tr th:each="author: ${element.authors}">
+    <span><td style="border-style: solid; border-width: 1px;"><b>author name:</b></td><td style="border-style: solid; border-width: 1px;" th:text="${author.name}" /></span>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table style="border-style: solid; font-size: 1.2em;" >
+    <tr><th style="border-style: solid; border-width: 1px;" >id:</th> <th style="border-style: solid; border-width: 1px;">title:</th>
+        <th style="border-style: solid; border-width: 1px;" >type:</th> <th style="border-style: solid; border-width: 1px;">style:</th><th style="border-style: solid; border-width: 1px;">amountOfElements:</th>
+        <th style="border-style: solid; border-width: 1px;" >yearOfPublish:</th> <th style="border-style: solid; border-width: 1px;">numOfPublish:</th>
+        <th style="border-style: solid; border-width: 1px;">publishCompanyId:</th><th style="border-style: solid; border-width: 1px;">publishCompanyName:</th></tr>
+    <tr th:each="element: ${reader_elements}">
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.elementId}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.title}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.type}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.style}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.amountOfElements}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.yearOfPublish}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.numOfPublish}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.publishCompanyId}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${element.publishCompanyName}" />
+    </tr>
+</table>
+<tr th:text="${message}"/>
+</body>
+</html>

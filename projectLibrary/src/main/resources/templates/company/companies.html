@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publish Company</title>
+</head>
+<body>
+<table style="border-style: solid; font-size: 1.2em; margin: auto;" >
+    <tr><th style="border-style: solid; border-width: 1px;" >id:</th> <th style="border-style: solid; border-width: 1px;">company name:</th></tr>
+    <tr th:each="company: ${companies}">
+        <td style="border-style: solid; border-width: 1px;" th:text="${company.publishCompanyId}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${company.nameOfCompany}" />
+    </tr>
+</table>
+</body>
+</html>

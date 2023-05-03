@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<table style="border-style: solid; font-size: 1.2em;" >
+  <tr><th style="border-style: solid; border-width: 1px;" >status:</th> <th style="border-style: solid; border-width: 1px;">date:</th></tr>
+  <tr th:each="dat: ${data}">
+    <td style="border-style: solid; border-width: 1px;" th:text="${dat.status}" />
+    <td style="border-style: solid; border-width: 1px;" th:text="${dat.date}" />
+  </tr>
+</table>
+</body>
+</html>

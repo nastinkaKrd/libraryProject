@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table style="border-style: solid; font-size: 1.2em;" >
+    <tr><th style="border-style: solid; border-width: 1px;" >id:</th> <th style="border-style: solid; border-width: 1px;">name:</th></tr>
+    <tr th:each="reader: ${readers}">
+        <td style="border-style: solid; border-width: 1px;" th:text="${reader.readerId}" />
+        <td style="border-style: solid; border-width: 1px;" th:text="${reader.name}" />
+    </tr>
+</table>
+<a href="reader_elements" style="text-decoration: none;">Форма для отримання даних про прочитані книги або журнали читача</a>
+</body>
+</html>
