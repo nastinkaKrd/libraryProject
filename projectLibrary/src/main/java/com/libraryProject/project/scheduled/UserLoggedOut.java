@@ -18,8 +18,9 @@ public class UserLoggedOut {
     public void logOut(){
         List<User> users = userRepository.findAll();
         for(User temp: users){
-            if (temp.isLogged()){
-                userRepository.save(new User(temp.getUserId(), temp.getUserName(), temp.getEmail(), temp.getPassword(), false));
+            if (temp.isActive()){
+                temp.setActive(false);
+                userRepository.save(temp);
             }
         }
     }

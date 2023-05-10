@@ -46,8 +46,8 @@ public class BuilderToDto {
     }
 
     static public UserDto toDto(User user){
-        return UserDto.builder().userId(user.getUserId()).userName(user.getUserName()).email(user.getEmail())
-                .isLogged(user.isLogged()).build();
+        return UserDto.builder().userId(user.getUserId()).email(user.getEmail())
+                .isActive(user.isActive()).build();
     }
 
     static public AllDataOfElementDto toDto(PrintedElementDto printedElementDto, List<AuthorDto> authors){

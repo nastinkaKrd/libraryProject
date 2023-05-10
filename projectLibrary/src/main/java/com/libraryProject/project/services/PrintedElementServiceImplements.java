@@ -5,6 +5,7 @@ import com.libraryProject.project.dto.AllDataOfElementDto;
 import com.libraryProject.project.dto.AuthorDto;
 import com.libraryProject.project.dto.MovementDto;
 import com.libraryProject.project.dto.PrintedElementDto;
+import com.libraryProject.project.exceptions.ApiRequestExceptionAlreadyReported;
 import com.libraryProject.project.exceptions.ApiRequestExceptionChangeStatus;
 import com.libraryProject.project.exceptions.ApiRequestExceptionNotFound;
 import com.libraryProject.project.models.*;
@@ -92,7 +93,7 @@ public class PrintedElementServiceImplements implements PrintedElementService {
             }
         }
         else {
-            throw new ApiRequestExceptionNotFound("Element was added before, not now");
+            throw new ApiRequestExceptionAlreadyReported("Element was added before, not now");
         }
     }
 
@@ -179,7 +180,7 @@ public class PrintedElementServiceImplements implements PrintedElementService {
                     movementRepository.save(new Movement(movementId, status, sqlDdate, reader.get(), element.get()));
                     isUpdated = true;
                 }else {
-                   throw new ApiRequestExceptionChangeStatus("You can't take this book/magazine, there aren't enough books/magazines");
+                    throw new ApiRequestExceptionChangeStatus("You can't take this book/magazine, there aren't enough books/magazines");
                 }
             }
             if(!isUpdated && status.startsWith(taked) && element.get().getAmountOfElements() >= Integer.parseInt(status.substring(6))){

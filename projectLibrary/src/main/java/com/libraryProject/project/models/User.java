@@ -2,6 +2,14 @@ package com.libraryProject.project.models;
 import lombok.*;
 
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.lang.annotation.Documented;
+import java.util.Collection;
+import java.util.Collections;
+
 
 @Entity
 @Table(name = "users")
@@ -9,7 +17,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User {
+public class User implements UserDetails {
     @Id
     @Column(name = "user_id")
     private int userId;
@@ -24,9 +32,44 @@ public class User {
     private String password;
 
     @Basic
-    @Column(name = "is_logged")
-    private boolean isLogged;
+    @Column(name = "active")
+    private boolean active;
 
+    private UserRoles role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getUsername() {
+        return userName;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return active;
+    }
+
+    /*@ManyToOne
+    @JoinColumn(name = "role", referencedColumnName = "role_id")
+    private UserRole role;*/
 
 
 }

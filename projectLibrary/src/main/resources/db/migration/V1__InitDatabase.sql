@@ -36,9 +36,15 @@ FOREIGN KEY(author) REFERENCES authors(author_id),
 printed_element INT NOT NULL,
 FOREIGN KEY(printed_element) REFERENCES printed_elements(printed_element_id));
 
+CREATE TABLE if not exists roles(
+role_id INT AUTO_INCREMENT PRIMARY KEY,
+role VARCHAR(255) NOT NULL);
+
 CREATE TABLE if not exists users(
 user_id INT AUTO_INCREMENT PRIMARY KEY,
 user_name VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
-is_logged boolean default false);
+active boolean default false,
+role INT,
+FOREIGN KEY(role) REFERENCES roles(role_id));

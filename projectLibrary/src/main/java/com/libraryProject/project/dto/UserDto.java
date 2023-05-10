@@ -21,5 +21,6 @@ public class UserDto {
     private String email;
 
     @NotBlank
-    private boolean isLogged;
+    private boolean isActive;
+
 }
