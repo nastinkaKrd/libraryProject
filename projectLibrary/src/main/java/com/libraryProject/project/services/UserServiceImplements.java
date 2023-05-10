@@ -1,6 +1,7 @@
 package com.libraryProject.project.services;
 
 import com.libraryProject.project.controllers.BuilderToDto;
+import com.libraryProject.project.dto.CreateUserForm;
 import com.libraryProject.project.dto.UserDto;
 import com.libraryProject.project.exceptions.ApiRequestExceptionAlreadyReported;
 import com.libraryProject.project.exceptions.ApiRequestExceptionNotFound;
@@ -19,7 +20,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserServiceImplements implements UserService, UserDetailsService {
-    UserRepository userRepository;
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     @Override
     public UserDto logIn(String email, String password, int id) {
@@ -67,15 +68,48 @@ public class UserServiceImplements implements UserService, UserDetailsService {
         }
     }
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return User.builder()
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+    }
+
+    @Override
+    public boolean create(CreateUserForm createUserForm) {
+
+        if (userRepository.existsByUsername(createUserForm.getUsername())) {
+            throw new RuntimeException("Username is already taken");
+        }
+
+        User user = User.builder()
+                .username(createUserForm.getUsername())
+                .password(passwordEncoder.encode(createUserForm.getPassword()))
+                .role(UserRoles.ROLE_USER)
                 .active(true)
-                .userId(1)
-                .role(UserRoles.ROLE_LIBRARIAN)
-                .userName("user")
-                .email("user@gmail.com")
-                .password(passwordEncoder.encode("userPasww"))
                 .build();
+
+        userRepository.save(user);
+
+        return true;
+    }
+
+    @Override
+    public boolean createAdminIfNotExists() {
+        if (!userRepository.existsByUsername("admin")) {
+            User user = User.builder()
+                    .userId(12345)
+                    .username("admin")
+                    .email("admin@gmail.com")
+                    .password(passwordEncoder.encode("admin"))
+                    .role(UserRoles.ROLE_ADMIN)
+                    .active(true)
+                    .build();
+
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 }

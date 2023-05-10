@@ -6,7 +6,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.lang.annotation.Documented;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -23,7 +22,7 @@ public class User implements UserDetails {
     private int userId;
     @Basic
     @Column(name = "user_name")
-    private String userName;
+    private String username;
     @Basic
     @Column(name = "email")
     private String email;
@@ -37,6 +36,8 @@ public class User implements UserDetails {
 
     private UserRoles role;
 
+    //private String role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(role.name()));
@@ -44,7 +45,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override
