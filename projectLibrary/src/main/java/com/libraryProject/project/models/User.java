@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 
 @Entity
@@ -21,7 +22,7 @@ public class User implements UserDetails {
     @Column(name = "user_id")
     private int userId;
     @Basic
-    @Column(name = "user_name")
+    @Column(name = "username")
     private String username;
     @Basic
     @Column(name = "email")
@@ -34,18 +35,25 @@ public class User implements UserDetails {
     @Column(name = "active")
     private boolean active;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private UserRoles role;
 
     //private String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(role.name()));
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override
@@ -68,9 +76,6 @@ public class User implements UserDetails {
         return active;
     }
 
-    /*@ManyToOne
-    @JoinColumn(name = "role", referencedColumnName = "role_id")
-    private UserRole role;*/
 
 
 }

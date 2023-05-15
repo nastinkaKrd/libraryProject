@@ -1,5 +1,6 @@
 package com.libraryProject.project.exceptions;
 
+import com.libraryProject.project.config.AuthenticationController;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
-@RestControllerAdvice
+@RestControllerAdvice(basePackages = "com.libraryProject.project.controllers",
+        basePackageClasses = AuthenticationController.class)
 public class HandlerExceptions {
     @ExceptionHandler(value = {ApiRequestExceptionNotFound.class})
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
@@ -17,9 +19,17 @@ public class HandlerExceptions {
         return new ErrorResponse(request.getRequestURI(), exception.getMessage());
     }
 
+
+
     @ExceptionHandler(value = {ApiRequestExceptionAlreadyReported.class})
     @ResponseStatus(code = HttpStatus.ALREADY_REPORTED)
     public ErrorResponse handleApiRequestExceptionAlreadyReported(@NotNull HttpServletRequest request, ApiRequestExceptionAlreadyReported exception){
+        return new ErrorResponse(request.getRequestURI(), exception.getMessage());
+    }
+
+    @ExceptionHandler(value = {ApiBadCredentialsException.class})
+    @ResponseStatus(code = HttpStatus.ALREADY_REPORTED)
+    public ErrorResponse handleApiBadCredentialsException(@NotNull HttpServletRequest request, ApiRequestExceptionAlreadyReported exception){
         return new ErrorResponse(request.getRequestURI(), exception.getMessage());
     }
 

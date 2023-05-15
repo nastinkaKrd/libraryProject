@@ -28,7 +28,7 @@ public class ReaderWebController {
         return "reader/reader_elements";
     }
 
-    @PostMapping("/get_elements")
+    @GetMapping("/get_elements")
     public String getElementss(@RequestParam(name = "id") int id, Model model) {
         List<PrintedElementDto> elementDtos = readerService.getElements(id);
         if (elementDtos.isEmpty()){

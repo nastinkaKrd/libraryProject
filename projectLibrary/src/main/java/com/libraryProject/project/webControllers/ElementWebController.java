@@ -20,7 +20,7 @@ public class ElementWebController {
     public String returnFormPageOfElement(){
         return "elementsWeb/element_id";
     }
-    @PostMapping("/show_element")
+    @GetMapping("/show_element")
     public String getElementData(@RequestParam(name = "id") int id, Model model){
          model.addAttribute("element", printedElementService.getElementInformation(id));
          return "elementsWeb/show_element";
@@ -59,7 +59,7 @@ public class ElementWebController {
     public String showStatus(){
         return "elementsWeb/show_status";
     }
-    @PostMapping("/status_data")
+    @GetMapping("/status_data")
     public String showStatusAndDate(@RequestParam(name = "id") int elementId, Model model){
         model.addAttribute("data", printedElementService.getStatusAndDate(elementId));
         return "elementsWeb/status_data";

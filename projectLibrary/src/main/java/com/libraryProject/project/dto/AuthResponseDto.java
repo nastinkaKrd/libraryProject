@@ -1,10 +1,11 @@
 package com.libraryProject.project.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 
+@Data
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class AuthResponseDto {
-    @Getter
-    private final String jwt;
+    private String jwt;
 }
