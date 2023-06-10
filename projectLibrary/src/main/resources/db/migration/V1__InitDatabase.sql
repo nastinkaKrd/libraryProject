@@ -51,5 +51,4 @@ revoked boolean default false,
 expired boolean default false,
 user INT NOT NULL,
 FOREIGN KEY(user) REFERENCES users(user_id));
-select * from users;
-select * from tokens;
+
